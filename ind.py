@@ -46,23 +46,6 @@ def add_window():
     bt1.grid(row=3, column=0, columnspan=2)
 
 
-# def load_window():
-#     def load_f():
-#         people.load(en4.get())
-#         load_w.destroy()
-#
-#     load_w = Toplevel()
-#     load_w.title('Сохранение')
-#     load_w.resizable(False, False)
-#     load_w.geometry('225x100')
-#     lb4 = Label(load_w, text="Введите название файла")
-#     en4 = Entry(load_w)
-#     bt3 = Button(load_w, text="Загрузить", command=load_f)
-#     lb4.pack(padx=2, pady=2)
-#     en4.pack(padx=2, pady=2)
-#     bt3.pack(padx=2, pady=2)
-
-
 def update_window():
     def upd():
         row = en1.get()
@@ -114,7 +97,7 @@ def update_window():
 
 def del_window():
     def row_del():
-        row = en1.get()
+        row = int(en1.get())
         print(row)
         cur.execute(f'''DELETE FROM peoples WHERE rowid = {row}''')
 

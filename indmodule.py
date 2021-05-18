@@ -50,6 +50,7 @@ class People:
     db = sqlite3.connect('ind.sqlite')
     cur = db.cursor()
     cur.execute('''CREATE TABLE IF NOT EXISTS peoples (
+        rowid INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
         phone TEXT,
         day INTEGER,
@@ -126,11 +127,10 @@ class People:
     def load(self) -> None:
         self.people = []
         data = self.cur.execute("SELECT * FROM peoples")
-        print(data)
         for i in data:
-            name = i[0]
-            phone = i[1]
-            birthday = [i[2], i[3], i[4]]
+            name = i[1]
+            phone = i[2]
+            birthday = [i[3], i[4], i[5]]
             self.people.append(
                 Person(
                     name=name,
@@ -148,5 +148,7 @@ class People:
             bdm = person.birthday[1]
             bdy = person.birthday[2]
 
-            self.cur.execute('''INSERT INTO peoples VALUES(?, ?, ?, ?, ?)''', (name, phone, bdd, bdm, bdy))
+            self.cur.execute('''INSERT INTO peoples (
+            name, phone, day, month, year) VALUES (?, ?, ?, ?, ?)
+            ''', (name, phone, bdd, bdm, bdy))
             self.db.commit()
